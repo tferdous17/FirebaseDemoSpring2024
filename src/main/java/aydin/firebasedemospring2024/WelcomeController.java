@@ -1,7 +1,10 @@
 package aydin.firebasedemospring2024;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Objects;
 
+import com.google.cloud.firestore.QueryDocumentSnapshot;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import javafx.fxml.FXML;
@@ -36,6 +39,30 @@ public class WelcomeController {
             welcomeEmailField.clear();
             welcomePhoneNumField.clear();
         }
+    }
+
+    @FXML
+    private void signIn() {
+        String email = welcomeEmailField.getText();
+        String phoneNum = welcomePhoneNumField.getText();
+
+        try {
+            UserRecord user = getUserByEmailOrPhoneNumber(email, phoneNum);
+            if (user != null) {
+                System.out.println("Successfully signed in.");
+                switchToPrimary();
+            }
+        } catch (FirebaseAuthException | IOException e) {
+            System.out.println("ERROR: Could not sign in. Please check email or phone number.");
+        }
+    }
+
+    private UserRecord getUserByEmailOrPhoneNumber(String email, String phoneNum) throws FirebaseAuthException, IOException {
+        UserRecord user = DemoApp.fauth.getUserByEmail(email);
+        if (user == null) {
+            user = DemoApp.fauth.getUserByPhoneNumber(phoneNum);
+        }
+        return user;
     }
 
     public boolean registerUser() {
