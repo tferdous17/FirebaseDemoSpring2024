@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class WelcomeController {
@@ -15,6 +16,9 @@ public class WelcomeController {
     public TextField welcomeAgeField;
     public Button btnRegister;
     public Button btnSignIn;
+    public TextField welcomeEmailField;
+    public TextField welcomePhoneNumField;
+    public Label labelStatusMsg;
 
 
     @FXML
@@ -24,15 +28,22 @@ public class WelcomeController {
 
     @FXML
     private void register() throws IOException {
-        if (registerUser()) { switchToPrimary(); }
+        if (registerUser()) {
+            labelStatusMsg.setText("User successfully registered. Please log in using only Email and Phone number.");
+            welcomeNameField.setVisible(false);
+            welcomeAgeField.setVisible(false);
+            btnRegister.setDisable(true);
+            welcomeEmailField.clear();
+            welcomePhoneNumField.clear();
+        }
     }
 
     public boolean registerUser() {
         UserRecord.CreateRequest request = new UserRecord.CreateRequest()
-                .setEmail("user222@example.com")
+                .setEmail(welcomeEmailField.getText())
                 .setEmailVerified(false)
                 .setPassword("secretPassword")
-                .setPhoneNumber("+11234567890")
+                .setPhoneNumber(welcomePhoneNumField.getText())
                 .setDisplayName("John Doe")
                 .setDisabled(false);
 
@@ -45,8 +56,10 @@ public class WelcomeController {
 
         } catch (FirebaseAuthException ex) {
             // Logger.getLogger(FirestoreContext.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("Error creating a new user in the firebase");
+//            System.out.println("Error creating a new user in the firebase");
+            ex.printStackTrace();
             return false;
+
         }
 
     }
