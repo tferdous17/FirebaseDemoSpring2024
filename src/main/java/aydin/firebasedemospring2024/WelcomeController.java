@@ -1,10 +1,12 @@
 package aydin.firebasedemospring2024;
 
 import java.io.IOException;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
+import com.google.api.core.ApiFuture;
+import com.google.cloud.firestore.DocumentReference;
 import com.google.cloud.firestore.QueryDocumentSnapshot;
+import com.google.cloud.firestore.WriteResult;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.UserRecord;
 import javafx.fxml.FXML;
@@ -14,14 +16,12 @@ import javafx.scene.control.TextField;
 
 public class WelcomeController {
 
-
-    public TextField welcomeNameField;
-    public TextField welcomeAgeField;
-    public Button btnRegister;
-    public Button btnSignIn;
-    public TextField welcomeEmailField;
-    public TextField welcomePhoneNumField;
     public Label labelStatusMsg;
+    public TextField registerNameTxt;
+    public TextField registerEmailTxt;
+    public TextField registerPassTxt;
+    public TextField registerPhoneTxt;
+    public Button registerButton;
 
 
     @FXML
@@ -32,19 +32,18 @@ public class WelcomeController {
     @FXML
     private void register() throws IOException {
         if (registerUser()) {
-            labelStatusMsg.setText("User successfully registered. Please log in using only Email and Phone number.");
-            welcomeNameField.setVisible(false);
-            welcomeAgeField.setVisible(false);
-            btnRegister.setDisable(true);
-            welcomeEmailField.clear();
-            welcomePhoneNumField.clear();
+            addUserToDb();
+            registerNameTxt.clear();
+            registerEmailTxt.clear();
+            registerPhoneTxt.clear();
+            registerPassTxt.clear();
         }
     }
 
     @FXML
     private void signIn() {
-        String email = welcomeEmailField.getText();
-        String phoneNum = welcomePhoneNumField.getText();
+        String email = registerEmailTxt.getText();
+        String phoneNum = registerPhoneTxt.getText();
 
         try {
             UserRecord user = getUserByEmailOrPhoneNumber(email, phoneNum);
@@ -67,12 +66,12 @@ public class WelcomeController {
 
     public boolean registerUser() {
         UserRecord.CreateRequest request = new UserRecord.CreateRequest()
-                .setEmail(welcomeEmailField.getText())
+                .setEmail(registerEmailTxt.getText())
+                .setDisplayName(registerNameTxt.getText())
                 .setEmailVerified(false)
-                .setPassword("secretPassword")
-                .setPhoneNumber(welcomePhoneNumField.getText())
-                .setDisplayName("John Doe")
+                .setPhoneNumber(registerPhoneTxt.getText())
                 .setDisabled(false);
+
 
         UserRecord userRecord;
         try {
@@ -89,5 +88,16 @@ public class WelcomeController {
 
         }
 
+    }
+
+    public void addUserToDb() {
+        DocumentReference docRef = DemoApp.fstore.collection("Persons").document(UUID.randomUUID().toString());
+
+        Map<String, Object> data = new HashMap<>();
+        data.put("Name", registerNameTxt.getText());
+        data.put("Password", registerPassTxt.getText());
+
+        //asynchronously write data
+        ApiFuture<WriteResult> result = docRef.set(data);
     }
 }
