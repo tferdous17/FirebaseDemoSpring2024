@@ -109,7 +109,7 @@ public class PrimaryController {
         }
         catch (InterruptedException | ExecutionException ex)
         {
-            ex.printStackTrace();
+            System.out.println("Error occurred. Possibly due to AGE not being captured during registration.");
         }
         return key;
     }
