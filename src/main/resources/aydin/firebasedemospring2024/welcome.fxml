@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" styleClass="VBox" stylesheets="@Styles/welcome.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aydin.firebasedemospring2024.WelcomeController">
+<VBox alignment="CENTER" spacing="20.0" styleClass="VBox" stylesheets="@Styles/welcome.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="aydin.firebasedemospring2024.WelcomeController">
    <children>
       <Label styleClass="Label" text="Welcome!" underline="true">
          <font>
@@ -17,15 +17,19 @@
       <TextField fx:id="registerEmailTxt" promptText="Email" styleClass="TextField" />
       <TextField fx:id="registerPassTxt" promptText="Password" styleClass="TextField" />
       <TextField fx:id="registerPhoneTxt" promptText="Phone" styleClass="TextField" />
-      <Button fx:id="registerButton" mnemonicParsing="false"  styleClass="Button" stylesheets="" text="Register">
+      <Button fx:id="registerButton" mnemonicParsing="false" onAction="#register" styleClass="Button" stylesheets="" text="Register">
          <font>
             <Font name="System Bold" size="12.0" />
          </font></Button>
       <TextField fx:id="signInEmailTxt" promptText="Email" styleClass="TextField" />
       <TextField fx:id="signInPassTxt" promptText="Password" styleClass="TextField" />
-      <Button fx:id="signInBtn" mnemonicParsing="false"  styleClass="Button" text="Sign In">
+      <Button fx:id="signInBtn" mnemonicParsing="false" onAction="#signIn" styleClass="Button" text="Sign In">
          <font>
             <Font name="System Bold" size="12.0" />
+         </font></Button>
+      <Button fx:id="secondaryButton" styleClass="Button" text="Switch to Primary View">
+         <font>
+            <Font name="System Bold Italic" size="12.0" />
          </font></Button>
    </children>
    <padding>
