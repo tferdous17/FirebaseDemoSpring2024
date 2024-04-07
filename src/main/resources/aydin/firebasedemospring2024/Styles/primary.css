@@ -1,0 +1,76 @@
+/* AnchorPane */
+.AnchorPane {
+    -fx-background-color: #f4f4f4; /* Light gray background */
+}
+
+/* VBox */
+.VBox {
+    -fx-padding: 40px;
+}
+
+/* Label */
+.Label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 24px;
+    -fx-text-fill: WHITE;
+    -fx-padding: 0 0 10px 0; /* Add space below */
+}
+
+/* TextField */
+.TextField {
+    -fx-font-family: "Arial";
+    -fx-font-size: 12px; /* Smaller font size */
+    -fx-prompt-text-fill: #A9A9A9; /* Dark gray */
+    -fx-background-color: #F5F5F5; /* Light gray */
+    -fx-padding: 6px; /* Smaller padding */
+    -fx-pref-width: 180px; /* Smaller width */
+    -fx-border-radius: 3px; /* Slightly rounded corners */
+    -fx-border-color: #C0C0C0; /* Light gray */
+    -fx-border-width: 1px;
+}
+
+/* TextField Focus */
+.TextField:focused {
+    -fx-border-color: #4CAF50; /* Green border on focus */
+}
+
+/* Button */
+.Button {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px; /* Smaller font size */
+    -fx-text-fill: #FFFFFF; /* White */
+    -fx-background-color: RED;
+    -fx-padding: 8px 12px; /* Smaller padding */
+    -fx-min-width: 90px; /* Smaller width */
+    -fx-border-radius: 3px; /* Slightly rounded corners */
+    -fx-border-color: BLACK;
+    -fx-border-width: 1px;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 10, 0.5 , 0 , 0 );
+}
+
+/* Button Hover */
+.Button:hover {
+    -fx-background-color: PINK;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 10, 0.5 , 0 , 0 );
+}
+
+/* Button Pressed */
+.Button:pressed {
+    -fx-background-color: DARKRED;
+    -fx-effect: dropshadow( gaussian , rgba(0,0,0,0.5) , 10, 0.5 , 0 , 0 );
+}
+
+/* TextArea */
+.TextArea {
+    -fx-font-family: "Arial";
+    -fx-font-size: 14px; /* Smaller font size */
+    -fx-prompt-text-fill: #A9A9A9; /* Dark gray */
+    -fx-background-color: #FFFFFF; /* White */
+    -fx-padding: 8px; /* Smaller padding */
+    -fx-pref-width: 300px; /* Bigger width */
+    -fx-pref-height: 150px; /* Bigger height */
+    -fx-border-radius: 3px; /* Slightly rounded corners */
+    -fx-border-color: #C0C0C0; /* Light gray */
+    -fx-border-width: 1px;
+}
